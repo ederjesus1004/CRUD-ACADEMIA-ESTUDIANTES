@@ -38,7 +38,7 @@ public final class EstudianteMapper {
                 .build();
     }
 
-    private static String normalizarEmail(String email) {
+    public static String normalizarEmail(String email) {
         return email.trim().toLowerCase();
     }
 }
