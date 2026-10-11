@@ -1,0 +1,96 @@
+<main>
+  <h1>Estudiantes</h1>
+
+  <form (ngSubmit)="guardar()">
+    <h2>{{ editandoId() === null ? 'Nuevo estudiante' : 'Editar estudiante' }}</h2>
+
+    @if (mensajeError()) {
+      <p class="alerta">{{ mensajeError() }}</p>
+    }
+
+    <label
+      >Código
+      <input name="codigo" [(ngModel)]="form.codigo" placeholder="U20241234" />
+      @if (erroresCampo()['codigo']) {
+        <small class="error">{{ erroresCampo()['codigo'] }}</small>
+      }
+    </label>
+
+    <label
+      >Nombres
+      <input name="nombres" [(ngModel)]="form.nombres" />
+      @if (erroresCampo()['nombres']) {
+        <small class="error">{{ erroresCampo()['nombres'] }}</small>
+      }
+    </label>
+
+    <label
+      >Apellidos
+      <input name="apellidos" [(ngModel)]="form.apellidos" />
+      @if (erroresCampo()['apellidos']) {
+        <small class="error">{{ erroresCampo()['apellidos'] }}</small>
+      }
+    </label>
+
+    <label
+      >Email
+      <input name="email" [(ngModel)]="form.email" />
+      @if (erroresCampo()['email']) {
+        <small class="error">{{ erroresCampo()['email'] }}</small>
+      }
+    </label>
+
+    <label
+      >Carrera
+      <input name="carrera" [(ngModel)]="form.carrera" />
+      @if (erroresCampo()['carrera']) {
+        <small class="error">{{ erroresCampo()['carrera'] }}</small>
+      }
+    </label>
+
+    <label
+      >Ciclo
+      <input name="ciclo" type="number" [(ngModel)]="form.ciclo" />
+      @if (erroresCampo()['ciclo']) {
+        <small class="error">{{ erroresCampo()['ciclo'] }}</small>
+      }
+    </label>
+
+    <div class="acciones">
+      <button type="submit">Guardar</button>
+      @if (editandoId() !== null) {
+        <button type="button" class="secundario" (click)="cancelar()">Cancelar</button>
+      }
+    </div>
+  </form>
+
+  @if (estudiantes().length === 0) {
+    <p>No hay estudiantes todavía.</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Estudiante</th>
+          <th>Email</th>
+          <th>Ciclo</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (e of estudiantes(); track e.id) {
+          <tr>
+            <td>{{ e.codigo }}</td>
+            <td>{{ e.descripcion }}</td>
+            <td>{{ e.email }}</td>
+            <td>{{ e.ciclo }}</td>
+            <td>
+              <button type="button" (click)="editar(e)">Editar</button>
+              <button type="button" class="peligro" (click)="eliminar(e)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</main>

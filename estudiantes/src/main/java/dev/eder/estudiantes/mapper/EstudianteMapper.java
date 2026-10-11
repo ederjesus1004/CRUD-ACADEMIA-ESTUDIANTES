@@ -33,6 +33,7 @@ public final class EstudianteMapper {
                 .descripcion(
                         estudiante.getNombres() + " " + estudiante.getApellidos() + " - " + estudiante.getCarrera())
                 .email(estudiante.getEmail())
+                .carrera(estudiante.getCarrera())
                 .ciclo(estudiante.getCiclo())
                 .fechaRegistro(estudiante.getFechaRegistro())
                 .build();
